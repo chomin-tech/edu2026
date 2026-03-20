@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leçon 5 : Bienvenue</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        // Tailwind dark mode configuration
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&family=Poppins:wght@400;600&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .french-font { font-family: 'Poppins', sans-serif; }
+        
+        /* Perspective for cards */
+        .perspective { perspective: 1000px; }
+        .backface-hidden { backface-visibility: hidden; }
+        
+        /* Custom scrollbar for dark mode */
+        .dark ::-webkit-scrollbar { width: 10px; }
+        .dark ::-webkit-scrollbar-track { background: #1a202c; }
+        .dark ::-webkit-scrollbar-thumb { background: #4a5568; border-radius: 5px; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-slate-900 dark:text-gray-100">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-gray-200 dark:border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-blue-800 dark:text-blue-400 french-font">Leçon 5</h1>
+            
+            <div class="flex items-center space-x-4">
+                <div class="space-x-6 hidden md:flex mr-4">
+                    <a href="#intro" class="hover:text-blue-600 dark:hover:text-blue-400 transition">소개</a>
+                    <a href="#grammar" class="hover:text-blue-600 dark:hover:text-blue-400 transition">문법</a>
+                    <a href="#vocabulary" class="hover:text-blue-600 dark:hover:text-blue-400 transition">단어</a>
+                    <a href="#quiz" class="hover:text-blue-600 dark:hover:text-blue-400 transition">퀴즈</a>
+                </div>
+                
+                <!-- Dark Mode Toggle Button -->
+                <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 hover:ring-2 hover:ring-blue-400 transition-all focus:outline-none">
+                    <i id="theme-toggle-dark-icon" class="fas fa-moon hidden text-gray-600"></i>
+                    <i id="theme-toggle-light-icon" class="fas fa-sun hidden text-yellow-400"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="intro" class="relative py-24 overflow-hidden bg-blue-900 dark:bg-blue-950 text-white transition-colors duration-500">
+        <div class="max-w-6xl mx-auto px-4 relative z-10 text-center">
+            <h2 class="text-6xl font-extrabold mb-4 french-font animate-fade-in">Bienvenue</h2>
+            <p class="text-2xl opacity-90 mb-8 font-light">환영합니다</p>
+            <div class="flex justify-center space-x-4">
+                <span class="bg-white/20 dark:bg-white/10 px-4 py-2 rounded-lg border border-white/30 text-sm backdrop-blur-sm">#가족관계</span>
+                <span class="bg-white/20 dark:bg-white/10 px-4 py-2 rounded-lg border border-white/30 text-sm backdrop-blur-sm">#소유형용사</span>
+                <span class="bg-white/20 dark:bg-white/10 px-4 py-2 rounded-lg border border-white/30 text-sm backdrop-blur-sm">#avoir_동사</span>
+            </div>
+        </div>
+        <!-- Animated Decorative Icons -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 flex justify-around items-center text-8xl pointer-events-none">
+            <i class="fas fa-users animate-pulse"></i>
+            <i class="fas fa-hand-holding-heart animate-bounce" style="animation-duration: 3s"></i>
+            <i class="fas fa-smile animate-pulse" style="animation-delay: 1s"></i>
+        </div>
+    </section>
+
+    <!-- Grammar Section -->
+    <section id="grammar" class="py-20 max-w-6xl mx-auto px-4">
+        <div class="flex items-center mb-10">
+            <div class="w-2 h-10 bg-blue-600 mr-4 rounded-full"></div>
+            <h3 class="text-3xl font-bold">Grammaire <span class="text-gray-400 dark:text-gray-500 text-lg ml-2 font-normal">프랑스어 문법</span></h3>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Possessive Adjectives -->
+            <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center mb-4 text-blue-600 dark:text-blue-400">
+                    <i class="fas fa-key mr-2"></i>
+                    <h4 class="text-xl font-bold">1. 소유형용사 (Adjectifs Possessifs)</h4>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400 mb-6">'나의', '너의'처럼 소유를 나타낼 때 사용하며, 명사의 성과 수에 일치시킵니다.</p>
+                <div class="overflow-hidden rounded-xl border border-gray-100 dark:border-slate-700">
+                    <table class="w-full text-sm">
+                        <thead class="bg-gray-50 dark:bg-slate-700/50 text-gray-700 dark:text-gray-300">
+                            <tr>
+                                <th class="p-3 text-left">주어</th>
+                                <th class="p-3 text-left">남성 단수</th>
+                                <th class="p-3 text-left">여성 단수</th>
+                                <th class="p-3 text-left">복수</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 dark:divide-slate-700">
+                            <tr class="hover:bg-gray-50 dark:hover:bg-slate-700 transition"><td class="p-3 font-semibold">Je</td><td class="p-3 french-font text-blue-600 dark:text-blue-400">mon</td><td class="p-3 french-font text-pink-500">ma</td><td class="p-3 french-font text-green-600">mes</td></tr>
+                            <tr class="hover:bg-gray-50 dark:hover:bg-slate-700 transition"><td class="p-3 font-semibold">Tu</td><td class="p-3 french-font text-blue-600 dark:text-blue-400">ton</td><td class="p-3 french-font text-pink-500">ta</td><td class="p-3 french-font text-green-600">tes</td></tr>
+                            <tr class="hover:bg-gray-50 dark:hover:bg-slate-700 transition"><td class="p-3 font-semibold">Il/Elle</td><td class="p-3 french-font text-blue-600 dark:text-blue-400">son</td><td class="p-3 french-font text-pink-500">sa</td><td class="p-3 french-font text-green-600">ses</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Avoir Verb -->
+            <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center mb-4 text-red-600 dark:text-red-400">
+                    <i class="fas fa-bolt mr-2"></i>
+                    <h4 class="text-xl font-bold">2. avoir 동사 (가지다)</h4>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400 mb-6">불규칙 동사로 암기가 필수적입니다.</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-red-50 dark:bg-red-900/20 p-4 rounded-xl text-center border border-red-100 dark:border-red-900/30">
+                        <span class="block text-xs text-red-400">J'</span>
+                        <span class="text-xl font-bold french-font">ai</span>
+                    </div>
+                    <div class="bg-red-50 dark:bg-red-900/20 p-4 rounded-xl text-center border border-red-100 dark:border-red-900/30">
+                        <span class="block text-xs text-red-400">Tu</span>
+                        <span class="text-xl font-bold french-font">as</span>
+                    </div>
+                    <div class="bg-red-50 dark:bg-red-900/20 p-4 rounded-xl text-center border border-red-100 dark:border-red-900/30">
+                        <span class="block text-xs text-red-400">Il / Elle</span>
+                        <span class="text-xl font-bold french-font">a</span>
+                    </div>
+                    <div class="bg-red-50 dark:bg-red-900/20 p-4 rounded-xl text-center border border-red-100 dark:border-red-900/30">
+                        <span class="block text-xs text-red-400">Nous</span>
+                        <span class="text-xl font-bold french-font">avons</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vocabulary Section -->
+    <section id="vocabulary" class="py-20 bg-gray-100 dark:bg-slate-800/50 transition-colors">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex items-center mb-10">
+                <div class="w-2 h-10 bg-green-600 mr-4 rounded-full"></div>
+                <h3 class="text-3xl font-bold">Vocabulaire <span class="text-gray-400 dark:text-gray-500 text-lg ml-2 font-normal">프랑스어 단어</span></h3>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Word 1 -->
+                <div onclick="flipCard(this)" class="group perspective h-40 cursor-pointer">
+                    <div class="relative w-full h-full transition-all duration-500 [transform-style:preserve-3d]">
+                        <div class="absolute inset-0 bg-white dark:bg-slate-800 rounded-2xl flex flex-col items-center justify-center shadow-sm dark:shadow-slate-900/50 backface-hidden">
+                            <i class="fas fa-user-tie text-blue-500 text-3xl mb-2"></i>
+                            <p class="font-bold">아버지</p>
+                        </div>
+                        <div class="absolute inset-0 bg-blue-600 text-white rounded-2xl flex items-center justify-center [transform:rotateY(180deg)] backface-hidden">
+                            <p class="text-2xl french-font">Le père</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Word 2 -->
+                <div onclick="flipCard(this)" class="group perspective h-40 cursor-pointer">
+                    <div class="relative w-full h-full transition-all duration-500 [transform-style:preserve-3d]">
+                        <div class="absolute inset-0 bg-white dark:bg-slate-800 rounded-2xl flex flex-col items-center justify-center shadow-sm backface-hidden">
+                            <i class="fas fa-user-nurse text-pink-500 text-3xl mb-2"></i>
+                            <p class="font-bold">어머니</p>
+                        </div>
+                        <div class="absolute inset-0 bg-pink-500 text-white rounded-2xl flex items-center justify-center [transform:rotateY(180deg)] backface-hidden">
+                            <p class="text-2xl french-font">La mère</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Word 3: (Le oeil + 페이지 이동) -->
+                <div onclick="window.location.href='./01/index.html'" class="group perspective h-40 cursor-pointer">
+                    <div class="relative w-full h-full transition-all duration-500">
+                        <div class="absolute inset-0 bg-green-600 dark:bg-green-700 text-white rounded-2xl flex flex-col items-center justify-center shadow-lg hover:scale-105 transition-transform">
+                            <i class="fas fa-eye text-white text-3xl mb-2"></i>
+                            <p class="text-2xl french-font">Le oeil</p>
+                            <span class="text-[10px] mt-2 opacity-70">클릭 시 이동</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Word 4 -->
+                <div onclick="flipCard(this)" class="group perspective h-40 cursor-pointer">
+                    <div class="relative w-full h-full transition-all duration-500 [transform-style:preserve-3d]">
+                        <div class="absolute inset-0 bg-white dark:bg-slate-800 rounded-2xl flex flex-col items-center justify-center shadow-sm backface-hidden">
+                            <i class="fas fa-hand-paper text-orange-500 text-3xl mb-2"></i>
+                            <p class="font-bold">손</p>
+                        </div>
+                        <div class="absolute inset-0 bg-orange-500 text-white rounded-2xl flex items-center justify-center [transform:rotateY(180deg)] backface-hidden">
+                            <p class="text-2xl french-font">La main</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Quiz -->
+    <section id="quiz" class="py-20 bg-white dark:bg-slate-900 transition-colors">
+        <div class="max-w-3xl mx-auto px-4 bg-gray-50 dark:bg-slate-800 rounded-3xl p-10 border border-gray-100 dark:border-slate-700 shadow-lg">
+            <h3 class="text-3xl font-bold text-center mb-8">💡 오늘의 퀴즈</h3>
+            <div id="quiz-container">
+                <p class="text-xl mb-6 text-center">"나의 책(남성형 명사 Livre)"을 프랑스어로 하면?</p>
+                <div class="grid gap-4">
+                    <button onclick="checkAnswer(this, false)" class="p-4 bg-white dark:bg-slate-700 border-2 border-gray-200 dark:border-slate-600 rounded-xl hover:border-blue-300 dark:hover:border-blue-500 transition text-left">A. Ma livre</button>
+                    <button onclick="checkAnswer(this, true)" class="p-4 bg-white dark:bg-slate-700 border-2 border-gray-200 dark:border-slate-600 rounded-xl hover:border-blue-300 dark:hover:border-blue-500 transition text-left">B. Mon livre</button>
+                    <button onclick="checkAnswer(this, false)" class="p-4 bg-white dark:bg-slate-700 border-2 border-gray-200 dark:border-slate-600 rounded-xl hover:border-blue-300 dark:hover:border-blue-500 transition text-left">C. Mes livre</button>
+                </div>
+            </div>
+            <div id="feedback" class="mt-8 hidden p-4 rounded-xl text-center font-bold"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 dark:bg-black text-white py-12 text-center transition-colors">
+        <p class="opacity-50 text-sm">© 2024 프랑스어(1) - 사직여자고등학교</p>
+        <div class="mt-4 text-xs opacity-30">본 페이지는 교육용으로 제작되었습니다.</div>
+    </footer>
+
+    <script>
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        // Change the icons based on current mode
+        function updateThemeIcons() {
+            if (document.documentElement.classList.contains('dark')) {
+                themeToggleDarkIcon.classList.add('hidden');
+                themeToggleLightIcon.classList.remove('hidden');
+            } else {
+                themeToggleDarkIcon.classList.remove('hidden');
+                themeToggleLightIcon.classList.add('hidden');
+            }
+        }
+
+        // Initialize Theme
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        updateThemeIcons();
+
+        // Toggle Theme on Click
+        themeToggleBtn.addEventListener('click', function() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+            updateThemeIcons();
+        });
+
+        // Flip Card Logic
+        function flipCard(card) {
+            const inner = card.querySelector('div');
+            if (inner.style.transform === 'rotateY(180deg)') {
+                inner.style.transform = 'rotateY(0deg)';
+            } else {
+                inner.style.transform = 'rotateY(180deg)';
+            }
+        }
+
+        // Quiz Logic
+        function checkAnswer(btn, isCorrect) {
+            const feedback = document.getElementById('feedback');
+            const buttons = document.querySelectorAll('#quiz-container button');
+            
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.remove('hover:border-blue-300', 'dark:hover:border-blue-500');
+            });
+
+            feedback.classList.remove('hidden');
+            if (isCorrect) {
+                btn.classList.add('bg-green-100', 'dark:bg-green-900/40', 'border-green-500');
+                feedback.innerText = "🎉 정답입니다!";
+                feedback.classList.add('bg-green-50', 'dark:bg-green-900/20', 'text-green-700', 'dark:text-green-400');
+            } else {
+                btn.classList.add('bg-red-100', 'dark:bg-red-900/40', 'border-red-500');
+                feedback.innerText = "❌ 다시 확인해보세요.";
+                feedback.classList.add('bg-red-50', 'dark:bg-red-900/20', 'text-red-700', 'dark:text-red-400');
+            }
+        }
+    </script>
+</body>
+</html>
