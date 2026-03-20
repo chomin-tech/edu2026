@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프랑스어 기초 학습 가이드</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tab-active {
+            background-color: #eff6ff;
+            color: #2563eb;
+            border-bottom: 2px solid #2563eb;
+        }
+        /* Modal Backdrop */
+        #modal-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 50;
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 p-4 md:p-8 font-sans">
+
+    <!-- Infographic Modal -->
+    <div id="modal-backdrop" onclick="closeModal(event)">
+        <div id="modal-content" class="bg-white w-11/12 max-w-2xl rounded-2xl shadow-2xl overflow-hidden animate-fade-in" onclick="event.stopPropagation()">
+            <div class="bg-indigo-600 p-4 text-white flex justify-between items-center">
+                <h3 class="font-bold text-lg">프랑스어 학습 인포그래픽</h3>
+                <button onclick="closeModal()" class="text-white hover:text-gray-200 text-2xl">&times;</button>
+            </div>
+            <div class="p-6 space-y-6">
+                <!-- Infographic Content: "unnamed" visual summary -->
+                <div class="grid grid-cols-2 gap-4 text-center">
+                    <div class="p-4 bg-blue-50 rounded-xl border border-blue-100">
+                        <div class="text-3xl mb-2">🎂</div>
+                        <p class="text-xs text-blue-600 font-bold uppercase tracking-wider">나이 표현</p>
+                        <p class="font-bold text-gray-800">Avoir + 나이 + Ans</p>
+                    </div>
+                    <div class="p-4 bg-purple-50 rounded-xl border border-purple-100">
+                        <div class="text-3xl mb-2">❓</div>
+                        <p class="text-xs text-purple-600 font-bold uppercase tracking-wider">의문사</p>
+                        <p class="font-bold text-gray-800">Quel / Quelle</p>
+                    </div>
+                    <div class="p-4 bg-green-50 rounded-xl border border-green-100">
+                        <div class="text-3xl mb-2">👤</div>
+                        <p class="text-xs text-green-600 font-bold uppercase tracking-wider">사람 확인</p>
+                        <p class="font-bold text-gray-800">Qui est-ce ?</p>
+                    </div>
+                    <div class="p-4 bg-yellow-50 rounded-xl border border-yellow-100">
+                        <div class="text-3xl mb-2">📦</div>
+                        <p class="text-xs text-yellow-600 font-bold uppercase tracking-wider">사물 확인</p>
+                        <p class="font-bold text-gray-800">Qu'est-ce que c'est ?</p>
+                    </div>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-xl border border-gray-200 text-center">
+                    <p class="text-sm font-bold text-gray-700 mb-2">🎓 프랑스 학제 요약</p>
+                    <div class="flex justify-around text-xs">
+                        <span>초등(5년)</span>
+                        <span>→</span>
+                        <span>중등(4년)</span>
+                        <span>→</span>
+                        <span>고등(3년)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 bg-gray-50 text-right">
+                <button onclick="closeModal()" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-bold transition-colors">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+        
+        <!-- Header -->
+        <header class="bg-blue-600 text-white p-8 text-center">
+            <h1 class="text-3xl font-bold mb-2">프랑스어 기초 학습 가이드</h1>
+            <p class="opacity-90">나이 표현 · 의문형용사 · 교육 문화</p>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="flex border-b">
+            <button id="tab-summary" onclick="switchTab('summary')" class="flex-1 py-4 text-center font-medium transition-colors tab-active">
+                핵심 요약
+            </button>
+            <button id="tab-quiz" onclick="switchTab('quiz')" class="flex-1 py-4 text-center font-medium transition-colors text-gray-500 hover:bg-gray-50">
+                퀴즈 풀기
+            </button>
+            <button id="tab-culture" onclick="switchTab('culture')" class="flex-1 py-4 text-center font-medium transition-colors text-gray-500 hover:bg-gray-50">
+                교육 문화
+            </button>
+        </nav>
+
+        <!-- Content Area -->
+        <main id="main-content" class="p-6 md:p-10 min-h-[400px]">
+            <!-- Content will be injected here -->
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-100 p-4 text-center text-xs text-gray-500">
+            프랑스어 나이 표현과 의문형용사 기초 학습 가이드 기반 교육용 앱 (Vanilla JS Ver.)
+        </footer>
+    </div>
+
+    <script>
+        // Data
+        const quizData = [
+            {
+                id: 1,
+                question: "프랑스어로 나이를 표현할 때 사용하는 동사는 무엇인가요?",
+                options: ["être", "avoir", "aller", "faire"],
+                answer: "avoir",
+                explanation: "프랑스어에서는 나이를 '가진 것'으로 취급하여 avoir 동사를 사용합니다."
+            },
+            {
+                id: 2,
+                question: "여성 단수 명사 앞에서 사용하는 의문형용사의 올바른 형태는?",
+                options: ["quel", "quels", "quelle", "quelles"],
+                answer: "quelle",
+                explanation: "여성 단수 명사에는 'quelle'을 사용합니다."
+            },
+            {
+                id: 3,
+                question: "사물을 확인할 때 사용하는 의문문은 무엇인가요?",
+                options: ["Qui est-ce ?", "Qu'est-ce que c'est ?", "Quel âge as-tu ?", "Comment ça va ?"],
+                answer: "Qu'est-ce que c'est ?",
+                explanation: "사람을 물을 때는 Qui est-ce ?, 사물을 물을 때는 Qu'est-ce que c'est ?를 사용합니다."
+            },
+            {
+                id: 4,
+                question: "명사 앞에 위치하는 예외적인 형용사가 아닌 것은?",
+                options: ["petit", "grand", "joli", "bleu"],
+                answer: "bleu",
+                explanation: "색깔을 나타내는 형용사는 보통 명사 뒤에 위치합니다. petit, grand, joli 등은 예외적으로 앞에 옵니다."
+            },
+            {
+                id: 5,
+                question: "프랑스의 대학 입학 자격 국가 시험의 명칭은?",
+                options: ["Grandes Écoles", "Le Baccalauréat", "La Mairie", "Le Collège"],
+                answer: "Le Baccalauréat",
+                explanation: "흔히 'le bac'이라고 불리는 바칼로레아는 대학 입학 자격을 부여하는 시험입니다."
+            }
+        ];
+
+        let userAnswers = {};
+        let currentTab = 'summary';
+
+        // Tab Templates
+        const templates = {
+            summary: `
+                <div class="space-y-8 animate-fade-in">
+                    <!-- Infographic Button -->
+                    <div class="flex justify-start">
+                        <button onclick="openModal()" class="flex items-center gap-2 px-4 py-2 bg-indigo-100 text-indigo-700 rounded-lg hover:bg-indigo-200 font-bold transition-all border border-indigo-200">
+                            🖼️ 인포그래픽 보기
+                        </button>
+                    </div>
+
+                    <section>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-blue-100 text-blue-600 p-2 rounded-lg mr-3 w-10 h-10 flex items-center justify-center font-bold">01</span>
+                            의사소통 및 표현
+                        </h2>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="p-4 border rounded-xl bg-blue-50">
+                                <h3 class="font-bold text-blue-800 mb-2">나이 묻고 답하기</h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    <strong>avoir</strong> 동사 사용!<br />
+                                    - Q: Tu as <strong>quel âge</strong> ?<br />
+                                    - A: J'ai <strong>20 ans</strong>.
+                                </p>
+                            </div>
+                            <div class="p-4 border rounded-xl bg-green-50">
+                                <h3 class="font-bold text-green-800 mb-2">대상 확인하기</h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    - 사람: <strong>Qui est-ce ?</strong><br />
+                                    - 사물: <strong>Qu'est-ce que c'est ?</strong>
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                            <span class="bg-blue-100 text-blue-600 p-2 rounded-lg mr-3 w-10 h-10 flex items-center justify-center font-bold">02</span>
+                            필수 문법 체크
+                        </h2>
+                        <div class="space-y-4">
+                            <div class="border rounded-xl p-5">
+                                <h3 class="font-bold mb-3 text-gray-700 underline decoration-blue-300 text-lg">의문형용사 quel의 변화</h3>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center">
+                                    <div class="bg-gray-100 p-2 rounded text-sm">남성 단수: <strong>quel</strong></div>
+                                    <div class="bg-pink-50 p-2 rounded text-sm">여성 단수: <strong>quelle</strong></div>
+                                    <div class="bg-gray-100 p-2 rounded text-sm">남성 복수: <strong>quels</strong></div>
+                                    <div class="bg-pink-50 p-2 rounded text-sm">여성 복수: <strong>quelles</strong></div>
+                                </div>
+                            </div>
+                            <div class="border rounded-xl p-5 bg-yellow-50">
+                                <h3 class="font-bold mb-2">💡 소유형용사 예외 규칙</h3>
+                                <p class="text-sm text-gray-600 leading-relaxed">
+                                    여성 단수 명사가 <strong>모음</strong>이나 <strong>무음 'h'</strong>로 시작하면, 발음을 위해 
+                                    ma, ta, sa 대신 <strong>mon, ton, son</strong>을 사용합니다.<br />
+                                    <span class="text-xs text-blue-600 italic">예: mon amie (나의 여사친)</span>
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            `,
+            culture: `
+                <div class="space-y-6 animate-fade-in">
+                    <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-6">
+                        <h3 class="text-xl font-bold text-indigo-800 mb-4">프랑스의 학제 시스템</h3>
+                        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                            <div class="flex-1 w-full p-4 bg-white rounded-lg shadow-sm text-center">
+                                <p class="text-sm font-bold text-gray-500">초등학교</p>
+                                <p class="text-xl font-black text-indigo-600">5년</p>
+                            </div>
+                            <div class="hidden md:block text-indigo-300 font-bold">→</div>
+                            <div class="flex-1 w-full p-4 bg-white rounded-lg shadow-sm text-center">
+                                <p class="text-sm font-bold text-gray-500">중학교</p>
+                                <p class="text-xl font-black text-indigo-600">4년</p>
+                            </div>
+                            <div class="hidden md:block text-indigo-300 font-bold">→</div>
+                            <div class="flex-1 w-full p-4 bg-white rounded-lg shadow-sm text-center">
+                                <p class="text-sm font-bold text-gray-500">고등학교</p>
+                                <p class="text-xl font-black text-indigo-600">3년</p>
+                            </div>
+                        </div>
+                        <p class="mt-4 text-sm text-indigo-700 text-center font-medium">※ 의무 교육 기간: 3세 ~ 16세</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="border rounded-xl p-5 hover:border-blue-300 transition-all bg-white">
+                            <h4 class="font-bold text-lg mb-2 text-gray-800">🎓 바칼로레아 (Le Bac)</h4>
+                            <p class="text-sm text-gray-600">고등학교 졸업 학력이자 대학 입학 자격을 부여하는 국가 시험입니다.</p>
+                        </div>
+                        <div class="border rounded-xl p-5 hover:border-blue-300 transition-all bg-white">
+                            <h4 class="font-bold text-lg mb-2 text-gray-800">🏛️ 그랑제콜 (Grandes Écoles)</h4>
+                            <p class="text-sm text-gray-600">일반 대학보다 상위에 있는 소수 정예 엘리트 고등 교육 기관입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            `
+        };
+
+        // Modal Functions
+        function openModal() {
+            const modal = document.getElementById('modal-backdrop');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent scroll
+        }
+
+        function closeModal(e) {
+            const modal = document.getElementById('modal-backdrop');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scroll
+        }
+
+        function switchTab(tab) {
+            currentTab = tab;
+            // Update UI tabs
+            ['summary', 'quiz', 'culture'].forEach(t => {
+                const el = document.getElementById(`tab-${t}`);
+                if (t === tab) {
+                    el.classList.add('tab-active');
+                    el.classList.remove('text-gray-500');
+                } else {
+                    el.classList.remove('tab-active');
+                    el.classList.add('text-gray-500');
+                }
+            });
+
+            if (tab === 'quiz') {
+                renderQuiz();
+            } else {
+                document.getElementById('main-content').innerHTML = templates[tab];
+            }
+        }
+
+        function renderQuiz() {
+            let quizHtml = `<div class="animate-fade-in space-y-8">`;
+            quizData.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="border-b pb-6 last:border-0">
+                        <p class="text-lg font-semibold mb-4 text-gray-800">${idx + 1}. ${q.question}</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            ${q.options.map(opt => `
+                                <button onclick="selectOption(${q.id}, '${opt}')" id="opt-${q.id}-${opt}" 
+                                    class="quiz-option p-3 rounded-lg border text-left transition-all hover:bg-gray-50 border-gray-200">
+                                    ${opt}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            quizHtml += `
+                <button id="submit-quiz" onclick="showResults()" disabled 
+                    class="w-full py-4 rounded-xl font-bold text-lg shadow-lg transition-all bg-gray-300 cursor-not-allowed text-gray-500">
+                    결과 확인하기
+                </button>
+            </div>`;
+            document.getElementById('main-content').innerHTML = quizHtml;
+            
+            // Re-apply selections if user already answered
+            Object.keys(userAnswers).forEach(qId => {
+                const opt = userAnswers[qId];
+                const btn = document.getElementById(`opt-${qId}-${opt}`);
+                if (btn) btn.className = 'quiz-option p-3 rounded-lg border text-left transition-all bg-blue-600 text-white border-blue-600 shadow-md';
+            });
+            checkQuizCompletion();
+        }
+
+        function selectOption(qId, opt) {
+            userAnswers[qId] = opt;
+            // UI Update
+            const siblings = document.querySelectorAll(`[id^="opt-${qId}-"]`);
+            siblings.forEach(s => s.className = 'quiz-option p-3 rounded-lg border text-left transition-all hover:bg-gray-50 border-gray-200');
+            
+            const selected = document.getElementById(`opt-${qId}-${opt}`);
+            selected.className = 'quiz-option p-3 rounded-lg border text-left transition-all bg-blue-600 text-white border-blue-600 shadow-md';
+            
+            checkQuizCompletion();
+        }
+
+        function checkQuizCompletion() {
+            const submitBtn = document.getElementById('submit-quiz');
+            if (!submitBtn) return;
+            if (Object.keys(userAnswers).length === quizData.length) {
+                submitBtn.disabled = false;
+                submitBtn.className = 'w-full py-4 rounded-xl font-bold text-lg shadow-lg transition-all bg-blue-600 hover:bg-blue-700 text-white';
+            }
+        }
+
+        function showResults() {
+            let score = 0;
+            quizData.forEach(q => {
+                if (userAnswers[q.id] === q.answer) score++;
+            });
+
+            let resultsHtml = `
+                <div class="text-center py-8 space-y-6 animate-fade-in">
+                    <div class="inline-block p-6 rounded-full bg-blue-100 mb-4">
+                        <span class="text-5xl font-black text-blue-600">${score}</span>
+                        <span class="text-xl text-blue-400"> / ${quizData.length}</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800">
+                        ${score === quizData.length ? "완벽합니다! 퓌르 프랑세(Pure Français)네요!" : "좋은 시도입니다! 다시 한 번 살펴볼까요?"}
+                    </h3>
+                    <div class="space-y-4 text-left mt-8">
+            `;
+
+            quizData.forEach(q => {
+                const isCorrect = userAnswers[q.id] === q.answer;
+                resultsHtml += `
+                    <div class="p-4 rounded-lg border-l-4 ${isCorrect ? 'border-green-500 bg-green-50' : 'border-red-500 bg-red-50'}">
+                        <div class="flex items-center mb-1">
+                            <span class="font-bold text-sm text-gray-700">${isCorrect ? '✓' : '✗'} ${q.question}</span>
+                        </div>
+                        <p class="text-xs text-gray-600 ml-4">${q.explanation}</p>
+                    </div>
+                `;
+            });
+
+            resultsHtml += `
+                    </div>
+                    <button onclick="resetQuiz()" class="flex items-center justify-center mx-auto px-6 py-2 bg-gray-800 text-white rounded-full hover:bg-gray-700 transition-colors">
+                        🔄 다시 풀기
+                    </button>
+                </div>
+            `;
+            document.getElementById('main-content').innerHTML = resultsHtml;
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            renderQuiz();
+        }
+
+        // Initialize
+        window.onload = () => switchTab('summary');
+    </script>
+</body>
+</html>
